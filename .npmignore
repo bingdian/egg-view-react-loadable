@@ -1,0 +1,11 @@
+.idea/
+example/
+coverage/
+node_modules/
+test/
+.autod.conf.js
+.eslintignore
+.eslintrc
+.gitignore
+.travis.yml
+package-lock.json
