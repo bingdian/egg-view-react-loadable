@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "extends": [
+    "eslint-config-ali/react"
+  ],
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "no-multi-spaces": 0
+  },
+  "globals": {
+    "ENV_IS_DEV": true,
+    "IS_NODE_ENV": true
+  }
+}

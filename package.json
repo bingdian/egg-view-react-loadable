@@ -1,0 +1,72 @@
+{
+  "name": "egg-view-react-loadable",
+  "version": "0.1.0",
+  "description": "React loadable SSR view plugin for egg",
+  "eggPlugin": {
+    "name": "reactLoadable"
+  },
+  "keywords": [
+    "egg",
+    "eggPlugin",
+    "egg-plugin",
+    "egg-view",
+    "egg-react-ssr",
+    "egg-ssr",
+    "loadable"
+  ],
+  "dependencies": {
+    "@loadable/component": "^5.11.0",
+    "@loadable/server": "^5.11.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg": "^2.16.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "egg-view-nunjucks": "^2.2.0",
+    "eslint": "^5.13.0",
+    "eslint-config-ali": "^9.0.2",
+    "eslint-config-egg": "^7.1.0",
+    "husky": "^3.1.0",
+    "react-router-dom": "^5.1.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "test": "npm run lint -- --fix && egg-bin pkgfiles && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "egg-bin pkgfiles --check && npm run lint && npm run cov",
+    "pkgfiles": "egg-bin pkgfiles",
+    "autod": "autod"
+  },
+  "files": [
+    "app",
+    "config",
+    "app.js"
+  ],
+  "ci": {
+    "version": "8, 10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bingdian/egg-view-react-loadable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bingdian/egg-view-react-loadable/issues"
+  },
+  "homepage": "https://github.com/bingdian/egg-view-react-loadable#readme",
+  "author": "imbingdian@gmail.com",
+  "license": "MIT"
+}

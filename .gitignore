@@ -1,0 +1,13 @@
+logs/
+npm-debug.log
+node_modules/
+coverage/
+.idea/
+run/
+.DS_Store
+*.swp
+/dist
+/ssr
+example/egg-view-react-loadable-ssr-example/client/dist
+example/egg-view-react-loadable-ssr-example/app/ssr
+package-lock.json
