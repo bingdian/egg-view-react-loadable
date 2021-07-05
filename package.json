@@ -15,10 +15,10 @@
     "loadable"
   ],
   "dependencies": {
-    "@loadable/component": "^5.11.0",
-    "@loadable/server": "^5.11.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "@loadable/component": "^5.14.1",
+    "@loadable/server": "^5.14.0",
+    "react": "^17.0.1",
+    "react-dom": "^16.14.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
@@ -52,7 +52,7 @@
     "app.js"
   ],
   "ci": {
-    "version": "8, 10"
+    "version": "8, 10, 12, 14, 16"
   },
   "husky": {
     "hooks": {
