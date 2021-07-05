@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "dependencies": {
-    "@loadable/babel-plugin": "^5.11.0",
+    "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "^5.11.0",
     "@loadable/server": "^5.11.0",
     "egg": "^2.25.0",
