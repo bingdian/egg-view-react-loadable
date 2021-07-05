@@ -6,6 +6,7 @@ import {
   StaticRouter,
   Switch,
 } from 'react-router-dom';
+import { loadableReady } from '@loadable/component';
 import routes from './routes';
 import BaseComponent from './component/BaseComponent';
 
@@ -43,7 +44,10 @@ class App extends Component {
 
 const clientRender = () => {
   const initState = window.__INITIAL_STATE__ || {};
-  ReactDOM.render(<App data={initState} />, document.getElementById('app'));
+
+  loadableReady(() => {
+    ReactDOM.hydrate(<App data={initState} />, document.getElementById('app'));
+  });
 };
 
 const serverRender = () => {
