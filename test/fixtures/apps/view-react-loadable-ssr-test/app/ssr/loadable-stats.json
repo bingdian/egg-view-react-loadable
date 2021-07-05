@@ -2,23 +2,23 @@
   "errors": [],
   "warnings": [],
   "version": "4.41.5",
-  "hash": "53820282",
-  "publicPath": "/assets/",
-  "outputPath": "/Users/bingdian/Dev/egg-view-react-loadable-ssr/test/fixtures/apps/view-react-loadable-ssr-test/app/ssr",
+  "hash": "bd624d82",
+  "publicPath": "/",
+  "outputPath": "${testDir}fixtures/apps/view-react-loadable-ssr-test/app/ssr",
   "assetsByChunkName": {
     "about": [
-      "about.53820282.css",
+      "about.bd624d82.css",
       "about.js"
     ],
     "home": [
-      "home.53820282.css",
+      "home.bd624d82.css",
       "home.js"
     ],
     "main": "main.js"
   },
   "assets": [
     {
-      "name": "about.53820282.css",
+      "name": "about.bd624d82.css",
       "size": 52,
       "chunks": [
         0
@@ -44,7 +44,7 @@
       "emitted": false
     },
     {
-      "name": "home.53820282.css",
+      "name": "home.bd624d82.css",
       "size": 51,
       "chunks": [
         1
@@ -71,7 +71,7 @@
     },
     {
       "name": "main.js",
-      "size": 11057,
+      "size": 11072,
       "chunks": [
         2
       ],
@@ -111,7 +111,7 @@
         1
       ],
       "assets": [
-        "home.53820282.css",
+        "home.bd624d82.css",
         "home.js"
       ],
       "children": {},
@@ -122,7 +122,7 @@
         0
       ],
       "assets": [
-        "about.53820282.css",
+        "about.bd624d82.css",
         "about.js"
       ],
       "children": {},
@@ -140,8 +140,8 @@
     {
       "errors": [],
       "warnings": [],
-      "publicPath": "/assets/",
-      "outputPath": "/Users/bingdian/Dev/egg-view-react-loadable-ssr/test/fixtures/apps/view-react-loadable-ssr-test/app/ssr",
+      "publicPath": "/",
+      "outputPath": "${testDir}fixtures/apps/view-react-loadable-ssr-test/app/ssr",
       "assetsByChunkName": {},
       "assets": [],
       "filteredAssets": 0,
@@ -182,8 +182,8 @@
     {
       "errors": [],
       "warnings": [],
-      "publicPath": "/assets/",
-      "outputPath": "/Users/bingdian/Dev/egg-view-react-loadable-ssr/test/fixtures/apps/view-react-loadable-ssr-test/app/ssr",
+      "publicPath": "/",
+      "outputPath": "${testDir}fixtures/apps/view-react-loadable-ssr-test/app/ssr",
       "assetsByChunkName": {},
       "assets": [],
       "filteredAssets": 0,
@@ -224,8 +224,8 @@
     {
       "errors": [],
       "warnings": [],
-      "publicPath": "/assets/",
-      "outputPath": "/Users/bingdian/Dev/egg-view-react-loadable-ssr/test/fixtures/apps/view-react-loadable-ssr-test/app/ssr",
+      "publicPath": "/",
+      "outputPath": "${testDir}fixtures/apps/view-react-loadable-ssr-test/app/ssr",
       "assetsByChunkName": {},
       "assets": [],
       "filteredAssets": 0,

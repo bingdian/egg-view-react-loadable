@@ -67,8 +67,8 @@ module.exports = class Engine {
       extractor,
     }, React.createElement(App, locals));
     const content = renderToString(jsx);
+    console.log(extractor);
     const scriptTags = extractor.getScriptTags();
-    const linkTags = extractor.getLinkTags();
     const styleTags = extractor.getStyleTags();
     const initStateContent = this.getInitStateContent(ctx, locals);
     const template = await this.getViewTemplate(ctx);

@@ -1,10 +1,13 @@
 'use strict';
 
 const mock = require('egg-mock');
+const setReactLoadableStatsPath = require('./utils/setReactLoadableStatsPath');
 
 describe('test/view-react-loadable-ssr.test.js', () => {
   let app;
+
   before(() => {
+    setReactLoadableStatsPath();
     app = mock.app({
       baseDir: 'apps/view-react-loadable-ssr-test',
     });

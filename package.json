@@ -15,12 +15,14 @@
     "loadable"
   ],
   "dependencies": {
-    "@loadable/component": "^5.14.1",
-    "@loadable/server": "^5.14.0",
+    "@loadable/component": "^5.15.0",
+    "@loadable/server": "^5.15.0",
     "react": "^17.0.1",
     "react-dom": "^16.14.0"
   },
   "devDependencies": {
+    "@loadable/babel-plugin": "^5.13.2",
+    "@loadable/webpack-plugin": "^5.15.0",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
     "egg": "^2.16.0",
@@ -32,6 +34,7 @@
     "eslint-config-ali": "^9.0.2",
     "eslint-config-egg": "^7.1.0",
     "husky": "^3.1.0",
+    "mz": "^2.7.0",
     "react-router-dom": "^5.1.2"
   },
   "engines": {
