@@ -12,8 +12,8 @@
     "egg-view-nunjucks": "^2.2.0",
     "egg-view-react-loadable": "git+ssh://git@github.com:bingdian/egg-view-react-loadable.git",
     "ip": "^1.1.5",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
