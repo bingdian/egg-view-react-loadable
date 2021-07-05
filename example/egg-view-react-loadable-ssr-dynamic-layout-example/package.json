@@ -7,7 +7,7 @@
     "@loadable/babel-plugin": "^5.11.0",
     "@loadable/component": "^5.11.0",
     "@loadable/server": "^5.11.0",
-    "egg": "^2.25.0",
+    "egg": "^2.29.4",
     "egg-cors": "^2.2.3",
     "egg-view-nunjucks": "^2.2.0",
     "egg-view-react-loadable": "git+ssh://git@github.com:bingdian/egg-view-react-loadable.git",
