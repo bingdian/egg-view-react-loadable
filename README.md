@@ -10,7 +10,7 @@
 [npm-image]: https://img.shields.io/npm/v/egg-view-react-loadable.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-view-react-loadable
 [travis-image]: https://img.shields.io/travis/bingdian/egg-view-react-loadable.svg?style=flat-square
-[travis-url]: https://travis-ci.org/bingdian/egg-view-react-loadable
+[travis-url]: https://travis-ci.com/bingdian/egg-view-react-loadable
 [codecov-image]: https://img.shields.io/codecov/c/github/bingdian/egg-view-react-loadable.svg?style=flat-square
 [codecov-url]: https://codecov.io/github/bingdian/egg-view-react-loadable?branch=master
 [david-image]: https://img.shields.io/david/bingdian/egg-view-react-loadable.svg?style=flat-square
