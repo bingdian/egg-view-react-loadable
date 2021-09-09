@@ -3,8 +3,8 @@
 const fs = require('mz/fs');
 const path = require('path');
 
-function setReactLoadableStatsPath() {
-  const loadableStatsFile = path.join(__dirname, '../fixtures/apps/view-react-loadable-ssr-test/app/ssr/loadable-stats.json');
+function setReactLoadableStatsPath(type) {
+  const loadableStatsFile = path.join(__dirname, `../fixtures/apps/view-react-loadable-ssr-test/app/public/${type}/loadable-stats.json`);
   const testDir = path.join(__dirname, '../');
 
   return fs.readFile(loadableStatsFile, 'utf-8')

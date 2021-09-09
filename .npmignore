@@ -8,4 +8,5 @@ test/
 .eslintrc
 .gitignore
 .travis.yml
+appveyor.yml
 package-lock.json

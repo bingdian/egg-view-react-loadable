@@ -19,9 +19,13 @@ module.exports = app => {
   };
 
   exports.reactLoadable = {
-    statsFile: path.join(app.baseDir, 'app/ssr/loadable-stats.json'),
-    layout: {
-      path: path.join(app.baseDir, 'app/view/layout.html'),
+    nodeStatsFile: path.join(app.baseDir, 'app/public/ssr/loadable-stats.json'),
+    webStatsFile: path.join(app.baseDir, 'app/public/csr/loadable-stats.json'),
+    template: {
+      renderSSR: {
+        renderSSRTemplate: path.join(app.baseDir, 'app/view/renderSSRLayout.html'),
+        viewEngine: 'nunjucks',
+      },
     },
   };
 

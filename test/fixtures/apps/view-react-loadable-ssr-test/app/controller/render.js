@@ -6,7 +6,7 @@ module.exports = app => {
       const { ctx }       = this;
       const { url, path } = ctx.request;
 
-      await ctx.render('main.js', {
+      await ctx.renderSSR({
         url,
         path,
       });

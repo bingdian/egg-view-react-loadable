@@ -10,8 +10,7 @@
     "eggPlugin",
     "egg-plugin",
     "egg-view",
-    "egg-react-ssr",
-    "egg-ssr",
+    "react-loadable",
     "loadable"
   ],
   "dependencies": {

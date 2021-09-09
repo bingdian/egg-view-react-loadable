@@ -2,9 +2,11 @@
 
 const fs = require('fs');
 const React = require('react');
-const { renderToString } = require('react-dom/server');
-const { ChunkExtractor, ChunkExtractorManager } = require('@loadable/server');
-const REACT_LOADABLE_TEMPLATE = Symbol('view#react-loadable-component-template');
+const assert = require('assert');
+const { renderToString, renderToNodeStream } = require('react-dom/server');
+const { ChunkExtractor } = require('@loadable/server');
+const REACT_LOADABLE_SSR_RENDER_TEMPLATE = Symbol('view#react-loadable-ssr-render-template');
+const REACT_LOADABLE_STREAM_RENDER_TEMPLATE = Symbol('view#react-loadable-stream-render-template');
 
 module.exports = class Engine {
   constructor(app) {
@@ -12,25 +14,69 @@ module.exports = class Engine {
     this.config = app.config.reactLoadable;
   }
 
-  get template() {
-    if (!this[ REACT_LOADABLE_TEMPLATE ]) {
-      const layout = this.config.layout;
-      const layoutFile = layout && layout.path;
-      const content = fs.readFileSync(layoutFile, 'utf8');
-      this[ REACT_LOADABLE_TEMPLATE ] = `\`${content}\``;
+  get SSRRenderTemplateString() {
+    if (!this[ REACT_LOADABLE_SSR_RENDER_TEMPLATE ]) {
+      const { template = {} } = this.config;
+      const { renderSSR = {} } = template;
+      const { renderSSRTemplate } = renderSSR;
+
+      assert(renderSSRTemplate, 'config.template.renderSSR.renderSSRTemplate required');
+
+      const content = fs.readFileSync(renderSSRTemplate, 'utf8');
+      this[ REACT_LOADABLE_SSR_RENDER_TEMPLATE ] = `\`${content}\``;
     }
-    return this[ REACT_LOADABLE_TEMPLATE ];
+    return this[ REACT_LOADABLE_SSR_RENDER_TEMPLATE ];
   }
 
-  async getViewTemplate(ctx) {
-    const layout = this.config.layout;
-    const viewEngine = layout && layout.viewEngine;
-    const template = this.template;
+  async renderSSRTemplate(ctx) {
+    const { template = {} } = this.config;
+    const { renderSSR = {} } = template;
+    const { viewEngine } = renderSSR;
+    const SSRRenderTemplateString = this.SSRRenderTemplateString;
 
     if (viewEngine) {
-      return await ctx.renderString(template, {}, { viewEngine });
+      return await ctx.renderString(SSRRenderTemplateString, {}, { viewEngine });
     }
-    return template;
+    return SSRRenderTemplateString;
+  }
+
+  get streamRenderTemplateString() {
+    if (!this[ REACT_LOADABLE_STREAM_RENDER_TEMPLATE ]) {
+      const { template = {} } = this.config;
+      const { renderToStream = {} } = template;
+      const { renderToStreamStartTemplate, renderToStreamEndTemplate } = renderToStream;
+
+      assert(renderToStreamStartTemplate, 'config.template.renderToStream.renderToStreamStartTemplate required');
+      assert(renderToStreamEndTemplate, 'config.template.renderToStream.renderToStreamEndTemplate required');
+
+      const renderToStreamStart = fs.readFileSync(renderToStreamStartTemplate, 'utf8');
+      const renderToStreamEnd = fs.readFileSync(renderToStreamEndTemplate, 'utf8');
+      this[ REACT_LOADABLE_STREAM_RENDER_TEMPLATE ] = {
+        renderToStreamStart: `\`${renderToStreamStart}\``,
+        renderToStreamEnd: `\`${renderToStreamEnd}\``,
+      };
+    }
+    return this[ REACT_LOADABLE_STREAM_RENDER_TEMPLATE ];
+  }
+
+  async getRenderStreamTemplate(ctx) {
+    const { template = {} } = this.config;
+    const { renderToStream = {} } = template;
+    const { viewEngine } = renderToStream;
+    const streamRenderTemplateString = this.streamRenderTemplateString;
+    const { renderToStreamStart, renderToStreamEnd } = streamRenderTemplateString;
+
+    if (viewEngine) {
+      return await Promise.all([
+        ctx.renderString(renderToStreamStart, {}, { viewEngine }),
+        ctx.renderString(renderToStreamEnd, {}, { viewEngine }),
+      ]);
+    }
+
+    return [
+      renderToStreamStart,
+      renderToStreamEnd,
+    ];
   }
 
   getInitStateContent(ctx, locals) {
@@ -59,21 +105,61 @@ module.exports = class Engine {
   }
 
   /* eslint no-unused-vars:off */
-  async render(ctx, name, locals, options = {}) {
-    const statsFile = this.config.statsFile;
-    const extractor = new ChunkExtractor({ statsFile });
-    const App = this.normalizeReactElement(extractor.requireEntrypoint());
-    const jsx = React.createElement(ChunkExtractorManager, {
-      extractor,
-    }, React.createElement(App, locals));
+  async render(ctx, locals, options = {}) {
+    const nodeStatsFile = this.config.nodeStatsFile;
+    const webStatsFile = this.config.webStatsFile;
+    const nodeExtractor = new ChunkExtractor({ statsFile: nodeStatsFile });
+    const webExtractor = new ChunkExtractor({ statsFile: webStatsFile });
+    const App = this.normalizeReactElement(nodeExtractor.requireEntrypoint());
+    const jsx = webExtractor.collectChunks(React.createElement(App, locals));
     const content = renderToString(jsx);
-    console.log(extractor);
-    const scriptTags = extractor.getScriptTags();
-    const styleTags = extractor.getStyleTags();
+    const scriptTags = webExtractor.getScriptTags();
+    const linkTags = webExtractor.getLinkTags();
+    const styleTags = webExtractor.getStyleTags();
     const initStateContent = this.getInitStateContent(ctx, locals);
-    const template = await this.getViewTemplate(ctx);
+    const template = await this.renderSSRTemplate(ctx);
 
     /* eslint no-eval:off */
     return eval(template);
+  }
+
+  async renderSSR(ctx, locals, options = {}) {
+    locals = Object.assign({}, locals);
+
+    try {
+      return await this.render(ctx, locals, options);
+    } catch (err) {
+      this.app.logger.error('[%s] server render error', err);
+      throw err;
+    }
+  }
+
+  async renderToStream(ctx, locals, options = {}, content = '') {
+    const { res } = ctx;
+    const nodeStatsFile = this.config.nodeStatsFile;
+    const webStatsFile = this.config.webStatsFile;
+    const nodeExtractor = new ChunkExtractor({ statsFile: nodeStatsFile });
+    const webExtractor = new ChunkExtractor({ statsFile: webStatsFile });
+    const App = this.normalizeReactElement(nodeExtractor.requireEntrypoint());
+    const jsx = webExtractor.collectChunks(React.createElement(App, locals));
+    const template = await this.getRenderStreamTemplate(ctx);
+    const [ renderToStreamStart, renderToStreamEnd ] = template;
+    const scriptTags = webExtractor.getScriptTags();
+    const linkTags = webExtractor.getLinkTags();
+    const styleTags = webExtractor.getStyleTags();
+    const initStateContent = this.getInitStateContent(ctx, locals);
+    const stream = renderToNodeStream(jsx);
+
+    // https://github.com/onvno/pokerface/issues/41
+    // @see https://koajs.com/
+    // To bypass Koa's built-in response handling, you may explicitly set ctx.respond = false;. Use this if you want to write to the raw res object instead of letting Koa handle the response for you.
+    ctx.respond = false;
+
+    res.write(eval(renderToStreamStart));
+
+    stream.pipe(res, { end: false });
+    stream.on('end', () => {
+      res.end(eval(renderToStreamEnd));
+    });
   }
 };

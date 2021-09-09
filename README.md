@@ -59,7 +59,7 @@ exports.reactLoadable = {
 exports.view = {
   root: [
     path.join(app.baseDir, 'app/view'),
-    path.join(app.baseDir, 'app/ssr'),
+    path.join(app.baseDir, 'app/public/ssr'),
   ].join(','),
   mapping: {
     '.html': 'nunjucks',
@@ -68,22 +68,39 @@ exports.view = {
 };
 
 exports.reactLoadable = {
-  statsFile: path.join(app.baseDir, 'app/ssr/loadable-stats.json'),
-  layout: {
-    path: path.join(app.baseDir, 'app/view/layout.html'),
-    viewEngine: 'nunjucks',
+  nodeStatsFile: path.join(app.baseDir, 'app/public/ssr/loadable-stats.json'),
+  webStatsFile: path.join(app.baseDir, 'app/public/csr/loadable-stats.json'),
+  template: {
+    // template config for `ctx.renderSSR`
+    renderSSR: {
+      renderSSRTemplate: path.join(app.baseDir, 'app/view/renderSSRLayout.html'),
+      viewEngine: 'nunjucks',
+    },
+    
+    // template config for `ctx.renderToStream`
+    renderToStream: {
+      renderToStreamStartTemplate: path.join(app.baseDir, 'app/view/renderToStreamStartTemplate.html'),
+      renderToStreamEndTemplate: path.join(app.baseDir, 'app/view/renderToStreamEndTemplate.html'),
+      viewEngine: 'nunjucks',
+    },
   },
 };
 ```
 
+see [config/config.default.js](config/config.default.js) for more detail.
+
+## Template
+
+### template for `ctx.renderSSR`
+
 ```html
-<!--  {app_root}/view/layout.html -->
+<!--  {app_root}/app/view/renderSSRLayout.html -->
 <!doctype html>
 <head>
     <meta charSet="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
-    <title>example</title>
+    <title>{{title}}</title>
     ${styleTags}
 </head>
 <body>
@@ -94,7 +111,69 @@ exports.reactLoadable = {
 </html>
 ```
 
-see [config/config.default.js](config/config.default.js) for more detail.
+### template for `ctx.renderToStream`
+
+```html
+<!--  {app_root}/app/view/renderToStreamStartTemplate.html -->
+<!doctype html>
+<head>
+  <meta charSet="utf-8"/>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+  <title>{{title}}</title>
+</head>
+<body>
+<div id="app">
+```
+
+```html
+<!--  {app_root}/app/view/renderToStreamEndTemplate.html -->
+  </div>
+  ${initStateContent}
+  ${scriptTags}
+</body>
+</html>
+```
+
+## Render
+
+### `ctx.renderSSR`
+
+```js
+// controller/home.js
+module.exports = app => {
+  return class HomeController extends app.Controller {
+    async index() {
+      const { ctx } = this;
+      const { url, path } = ctx;
+
+      await ctx.renderSSR({
+        url,
+        path,
+      });
+    }
+  };
+};
+```
+
+### `ctx.renderToStream`
+
+```js
+// controller/home.js
+module.exports = app => {
+  return class HomeController extends app.Controller {
+    async index() {
+      const { ctx } = this;
+      const { url, path } = ctx;
+
+      await ctx.renderToStream({
+        url,
+        path,
+      });
+    }
+  };
+};
+```
 
 ## Questions & Suggestions
 

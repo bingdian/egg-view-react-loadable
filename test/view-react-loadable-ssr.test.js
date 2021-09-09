@@ -7,7 +7,8 @@ describe('test/view-react-loadable-ssr.test.js', () => {
   let app;
 
   before(() => {
-    setReactLoadableStatsPath();
+    setReactLoadableStatsPath('ssr');
+    setReactLoadableStatsPath('csr');
     app = mock.app({
       baseDir: 'apps/view-react-loadable-ssr-test',
     });
