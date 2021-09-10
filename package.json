@@ -1,6 +1,6 @@
 {
   "name": "egg-view-react-loadable",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "React loadable SSR view plugin for egg",
   "eggPlugin": {
     "name": "reactLoadable"
