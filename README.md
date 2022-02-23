@@ -30,6 +30,10 @@ React loadable SSR view plugin for egg
 
 see [https://loadable-components.com/](https://loadable-components.com/) for more detail.
 
+## Example
+
+[egg-react-ssr-app-example](https://github.com/bingdian/egg-react-ssr-app-example)
+
 ## Install
 
 ```bash
