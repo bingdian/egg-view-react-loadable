@@ -61,11 +61,6 @@
   "ci": {
     "version": "8, 10, 12, 14, 16"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bingdian/egg-view-react-loadable.git"

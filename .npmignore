@@ -9,4 +9,5 @@ test/
 .gitignore
 .travis.yml
 appveyor.yml
+commitlint.config.js
 package-lock.json
