@@ -1,7 +1,7 @@
 # egg-view-react-loadable
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
+[![Continuous Integration][ci-image]][ci-url]
 [![Test coverage][codecov-image]][codecov-url]
 [![David deps][david-image]][david-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
@@ -9,8 +9,8 @@
 
 [npm-image]: https://img.shields.io/npm/v/egg-view-react-loadable.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-view-react-loadable
-[travis-image]: https://img.shields.io/travis/bingdian/egg-view-react-loadable.svg?style=flat-square
-[travis-url]: https://travis-ci.com/bingdian/egg-view-react-loadable
+[ci-image]: https://github.com/bingdian/egg-view-react-loadable/workflows/CI/badge.svg?branch=master&event=push
+[ci-url]: https://github.com/bingdian/egg-view-react-loadable/actions?query=branch%3Amaster
 [codecov-image]: https://img.shields.io/codecov/c/github/bingdian/egg-view-react-loadable.svg?style=flat-square
 [codecov-url]: https://codecov.io/github/bingdian/egg-view-react-loadable?branch=master
 [david-image]: https://img.shields.io/david/bingdian/egg-view-react-loadable.svg?style=flat-square
