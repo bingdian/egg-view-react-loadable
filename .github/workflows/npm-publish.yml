@@ -20,9 +20,6 @@ jobs:
       - name: Continuous integration
         run: npm run ci
 
-      - name: Build
-        run: npm run build
-
       - name: Code Coverage
         uses: codecov/codecov-action@v1
         with:
@@ -37,7 +34,11 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish --access public
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Install Publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
