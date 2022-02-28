@@ -3,7 +3,6 @@
 [![NPM version][npm-image]][npm-url]
 [![Continuous Integration][ci-image]][ci-url]
 [![Test coverage][codecov-image]][codecov-url]
-[![David deps][david-image]][david-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
 
@@ -13,9 +12,7 @@
 [ci-url]: https://github.com/bingdian/egg-view-react-loadable/actions?query=branch%3Amaster
 [codecov-image]: https://img.shields.io/codecov/c/github/bingdian/egg-view-react-loadable.svg?style=flat-square
 [codecov-url]: https://codecov.io/github/bingdian/egg-view-react-loadable?branch=master
-[david-image]: https://img.shields.io/david/bingdian/egg-view-react-loadable.svg?style=flat-square
-[david-url]: https://david-dm.org/bingdian/egg-view-react-loadable
-[snyk-image]: https://snyk.io/test/npm/egg-view-react-loadable/badge.svg?style=flat-square
+[snyk-image]: https://snyk.io/test/npm/egg-view-react-loadable/badge.svg?style=flat-square†
 [snyk-url]: https://snyk.io/test/npm/egg-view-react-loadable
 [download-image]: https://img.shields.io/npm/dm/egg-view-react-loadable.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-view-react-loadable
