@@ -1,6 +1,6 @@
 {
   "name": "egg-view-react-loadable",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "description": "React loadable SSR view plugin for egg",
   "eggPlugin": {
     "name": "reactLoadable"
@@ -18,8 +18,8 @@
   "dependencies": {
     "@loadable/component": "^5.15.0",
     "@loadable/server": "^5.15.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
